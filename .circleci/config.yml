@@ -39,8 +39,6 @@ jobs:
     steps:
       - checkout
       - run:
-          command: cd server
-      - run:
           name: Version information
           command: rustc --version; cargo --version; rustup --version
       - run:
@@ -56,8 +54,6 @@ jobs:
     steps:
       - checkout
       - run:
-          command: cd server
-      - run:
           name: Version information
           command: rustc --version; cargo --version; rustup --version
       - run:
@@ -66,6 +62,17 @@ jobs:
       - run:
           name: Linting
           command: cargo clippy
+  deploy:
+    docker:
+      - image: circleci/rust
+    steps:
+      - checkout
+      - run:
+          name: Login to crates.io
+          command: cargo login $CRATESIO_TOKEN
+      - run:
+          name: Publish to crates.io
+          command: cargo publish
 
 workflows:
   version: 2
@@ -83,3 +90,8 @@ workflows:
           filters:
             tags:
               only: /.*/
+      - deploy:
+          requires:
+            - build-and-test
+            - format
+            - lint
