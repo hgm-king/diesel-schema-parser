@@ -7,7 +7,7 @@
 **/
 use diesel_schema_parser::{generator, parser, utils};
 
-use serde_json::{Result, Value};
+use serde_json::Value;
 
 fn main() {
     let config_string = utils::open_file("./.db-schema-parser-config.json");
