@@ -19,12 +19,12 @@ impl fmt::Display for ParseError {
 type Result<T> = std::result::Result<T, ParseError>;
 
 pub fn parse_schema(tables: &str) -> Result<Vec<Table>> {
-    parser::parse_schema(tables)
+    parser_mod::parse_schema(tables)
         .map(|t| t.1)
         .map_err(|_| ParseError)
 }
 
-pub(self) mod parser {
+pub(self) mod parser_mod {
     use super::Column;
     use super::DataType;
     use super::Table;

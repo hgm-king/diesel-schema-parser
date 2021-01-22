@@ -19,10 +19,10 @@ pub fn open_file(url: &str) -> String {
         panic!("couldn't read {}: {}", display, why);
     }
 
-    return s;
+    s
 }
 
-pub fn save_file(url: String, data: &str) -> () {
+pub fn save_file(url: String, data: &str) {
     let path = Path::new(&url);
     let display = path.display();
 

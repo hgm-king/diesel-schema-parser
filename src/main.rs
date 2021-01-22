@@ -7,10 +7,6 @@
 **/
 use vermillion::{generator, parser, utils};
 
-use std::fs::File;
-use std::io::prelude::*;
-use std::path::Path;
-
 fn main() {
     let schema_string = utils::open_file("./src/schema.rs");
     let template_string = utils::open_file("./templates/model.txt");

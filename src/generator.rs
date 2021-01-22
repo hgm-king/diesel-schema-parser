@@ -1,4 +1,4 @@
-use crate::{utils, Column, DataType, Table};
+use crate::{utils, Column, Table};
 /**
  * generator.rs
  *
@@ -50,7 +50,7 @@ fn generate_column(column: Column) -> String {
 
 // given a template file, a parsed schema of tables, and a folder path
 // fill in the template for each table and save the model file to the folder
-pub fn generate_models(template: &str, tables: &Vec<Table>, folder_path: &str) -> Result<usize> {
+pub fn generate_models(template: &str, tables: &[Table], folder_path: &str) -> Result<usize> {
     let mut count = 0;
     println!("Generating Models");
 
@@ -59,7 +59,7 @@ pub fn generate_models(template: &str, tables: &Vec<Table>, folder_path: &str) -
 
         let name = table.name.to_owned();
         let columns = table.columns.to_owned();
-        let key = table.primary_key.to_owned();
+        let _key = table.primary_key.to_owned();
 
         let save_path = format!("{}/{}Model.rs", folder_path, name);
 
