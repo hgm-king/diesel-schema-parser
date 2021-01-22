@@ -5,7 +5,7 @@
  * The schema is parsed into a struct(found in parser.rs)
  * which is then used to fill in a given template file
 **/
-use vermillion::{generator, parser, utils};
+use diesel_schema_parser::{generator, parser, utils};
 
 fn main() {
     let schema_string = utils::open_file("./src/schema.rs");
