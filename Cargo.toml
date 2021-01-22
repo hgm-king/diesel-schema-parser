@@ -1,5 +1,6 @@
 [package]
 name = "vermillion"
+description = "Diesel Schema Parser and Model Generator"
 version = "0.1.0"
 authors = ["hgking <hgmaxwellking@gmail.com>"]
 edition = "2018"

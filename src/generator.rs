@@ -1,15 +1,11 @@
+use crate::{utils, Column, DataType, Table};
 /**
  * generator.rs
  *
  * holds the code to receive a parsed schema file,
  * then generate model files based on a template
 **/
-use vermillion::*;
-
 use std::fmt;
-use std::fs::File;
-use std::io::Write;
-use std::path::Path;
 
 #[derive(Debug, Clone)]
 pub struct GenerateError;
@@ -77,26 +73,12 @@ pub fn generate_models(template: &str, tables: &Vec<Table>, folder_path: &str) -
         template_copy = template_copy.replace("{columns}", &column_string);
 
         println!("-- {}", save_path);
-        save_file(save_path, &template_copy);
+        utils::save_file(save_path, &template_copy);
 
         count += 1;
     }
 
     Ok(count)
-}
-
-fn save_file(url: String, data: &str) -> () {
-    let path = Path::new(&url);
-    let display = path.display();
-
-    let mut file = match File::create(&path) {
-        Err(why) => panic!("couldn't create {}: {}", display, why),
-        Ok(file) => file,
-    };
-
-    if let Err(why) = file.write_all(data.as_bytes()) {
-        panic!("couldn't write to {}: {}", display, why);
-    }
 }
 
 #[cfg(test)]
