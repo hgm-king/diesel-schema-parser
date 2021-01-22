@@ -7,10 +7,16 @@
 **/
 use diesel_schema_parser::{generator, parser, utils};
 
+use serde_json::{Result, Value};
+
 fn main() {
-    let schema_string = utils::open_file("./src/schema.rs");
-    let template_string = utils::open_file("./templates/model.txt");
-    let models_folder_path = "./src/models";
+    let config_string = utils::open_file("./.db-schema-parser-config.json");
+
+    let config: Value = serde_json::from_str(config_string).expect("Error parsing json config!");
+
+    let schema_string = utils::open_file(config["schema"]);
+    let template_string = utils::open_file(config["template"]);
+    let models_folder_path = config["models"];
 
     let schema = parser::parse_schema(&schema_string).expect("Error parsing your schema!");
 

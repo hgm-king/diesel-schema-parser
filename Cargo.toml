@@ -1,16 +1,17 @@
 [package]
 name = "diesel_schema_parser"
 description = "Diesel Schema Parser and Model Generator"
-version = "0.1.0"
+version = "0.1.1"
 authors = ["hgking <hgmaxwellking@gmail.com>"]
 edition = "2018"
 homepage = "https://github.com/HGHimself/diesel-schema-parser"
 repository = "https://github.com/HGHimself/diesel-schema-parser"
-documentation = "https://github.com/HGHimself/diesel-schema-parser/README.md"
+documentation = "https://github.com/HGHimself/diesel-schema-parser"
 readme = "./README.md"
 license = "MIT OR Apache-2.0"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+serde_json = "1.0"
 nom = "6.0.1"
