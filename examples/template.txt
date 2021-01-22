@@ -10,7 +10,7 @@ use diesel::prelude::*;
 use diesel::dsl::Eq;
 
 
-#[derive(Debug,GraphQLObject,Insertable,Queryable,)]
+#[derive(Debug,Insertable,Queryable,)]
 #[table_name="{table_name}"]
 pub struct {table_name}T {{columns}
 }

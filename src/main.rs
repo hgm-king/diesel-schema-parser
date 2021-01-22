@@ -12,17 +12,20 @@ use serde_json::{Result, Value};
 fn main() {
     let config_string = utils::open_file("./.db-schema-parser-config.json");
 
-    let config: Value = serde_json::from_str(config_string).expect("Error parsing json config!");
+    let config: Value = serde_json::from_str(&config_string).expect("Error parsing json config!");
 
-    let schema_string = utils::open_file(config["schema"]);
-    let template_string = utils::open_file(config["template"]);
-    let models_folder_path = config["models"];
+    let schema_path = config["schema"].as_str().unwrap();
+    let template_path = config["template"].as_str().unwrap();
+    let models_path = config["models"].as_str().unwrap();
+
+    let schema_string = utils::open_file(schema_path);
+    let template_string = utils::open_file(template_path);
 
     let schema = parser::parse_schema(&schema_string).expect("Error parsing your schema!");
 
     println!("Generating {} models", schema.len());
 
-    let count = generator::generate_models(&template_string, &schema, models_folder_path)
+    let count = generator::generate_models(&template_string, &schema, models_path)
         .expect("Error generating models!");
 
     println!("Generated {} models", count);
